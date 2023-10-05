@@ -87,4 +87,4 @@ if __name__ == "__main__":
     added_lines = parse_patch_data(data)
 
     with open(github_env, 'a', encoding='utf-8') as f:
-        f.write(json.dumps(get_lines(added_lines)))
+        f.write(f'changed_lines={json.dumps(get_lines(added_lines))}')
