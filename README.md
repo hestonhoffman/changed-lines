@@ -1,8 +1,9 @@
 # Added Lines
 
-
-
 This GitHub action returns the file names and modified lines of each file in a pull request. This is useful if you're running a custom linter against your files and you want to compare log lines against modified lines in your PR. 
+
+> [!NOTE]
+> This action only works with pull requests.
 
 The action outputs a JSON formatted string. For example:
 ```json
