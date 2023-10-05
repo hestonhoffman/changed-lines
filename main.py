@@ -73,6 +73,11 @@ if __name__ == "__main__":
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR_NUMBER')
     github_env = os.getenv('GITHUB_ENV')
+    
+    print(repo)
+    print(branch_name)
+    print(pr)
+    print(github_env)
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
