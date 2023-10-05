@@ -8,6 +8,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test changed lines
         id: changed_lines
-        uses: hestonhoffman/changed-lines@ff5487344fef179bdd067ed995d0c407a2967b99
+        uses: hestonhoffman/changed-lines@heston/test-action
       - name: Print changed lines
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
