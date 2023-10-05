@@ -28,7 +28,6 @@ def parse_patch_data(patch_data):
     '''Takes the patch data and returns a dictionary of files and the lines'''
     final_dict = {}
     for entry in patch_data:
-        # patch_dict[entry['filename']] = entry['patch']
         patch_array = re.split('\n', entry['patch'])
         # clean patch array
         patch_array = [i for i in patch_array if i]

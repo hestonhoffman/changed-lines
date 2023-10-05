@@ -1,6 +1,8 @@
-# Added Lines
+# Changed Lines
 
-This GitHub action returns the file names and modified lines of each file in a pull request. This is useful if you're running a custom linter against your files and you want to compare log lines against modified lines in your PR. 
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/hestonhoffman/changed-lines)
+
+This GitHub action returns the file names and modified lines of each file in a pull request. This is useful if you're running a custom linter against your files and you want to compare log lines against modified lines in your PR.
 
 > [!NOTE]
 > This action only works with pull requests.
@@ -22,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Find changed lines
         id: changed_lines
-        uses: hestonhoffman/changed_lines@v1
+        uses: hestonhoffman/changed_lines@main
       - name: Print changed lines
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
 ```
