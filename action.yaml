@@ -17,7 +17,7 @@ inputs:
   pr:
     description: 'Pull Request number'
     required: false
-    default: '${{ github.event_number }}'
+    default: '${{ github.event.number }}'
 outputs:
   changed_lines:
     description: 'Lines with changes'
