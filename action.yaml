@@ -1,0 +1,26 @@
+name: Changed lines
+description: Get all modified lines in a Pull Request
+author: "Heston Hoffman"
+inputs:
+  token:
+    description: 'Assign a GITHUB_TOKEN to use'
+    required: false
+    default: '${{ github.token }}'
+  branch:
+    description: 'Current PR branch'
+    required: false
+    default: '${{ github.ref_name }}'
+  repo:
+    description: 'Repository to compare against'
+    required: false
+    default: '${{ github.repository }}'
+  pr_number:
+    description: 'Pull Request number'
+    required: false
+    default: '${{ github.event_number }}'
+outputs:
+  changed_lines:
+    description: 'Lines with changes'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
