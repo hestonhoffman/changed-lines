@@ -4,8 +4,8 @@ WORKDIR /app
 
 RUN pip install --target=/app requests
 
-FROM gcr.io/distroless/python3-debian10
+FROM gcr.io/distroless/python3
 COPY --from=builder /app /app
 WORKDIR /app
 ENV PYTHONPATH /app
-CMD ["/cmd/main.py"]
+CMD ["/app/main.py"]
