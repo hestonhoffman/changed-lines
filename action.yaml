@@ -1,6 +1,9 @@
 name: Changed lines
 description: Get all modified lines in a Pull Request
 author: "Heston Hoffman"
+branding:
+  icon: 'git-pull-request'
+  color: 'green'
 inputs:
   token:
     description: 'Assign a GITHUB_TOKEN to use'
