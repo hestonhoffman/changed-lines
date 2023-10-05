@@ -74,11 +74,6 @@ if __name__ == "__main__":
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR')
     github_env = os.getenv('GITHUB_ENV')
-    
-    print(f'REPO: {repo}')
-    print(f'BRANCH: {branch_name}')
-    print(f'PR NUMBER: {pr}')
-    print(f'ENV: {github_env}')
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
