@@ -14,7 +14,7 @@ inputs:
     description: 'Repository to compare against'
     required: false
     default: '${{ github.repository }}'
-  pr_number:
+  pr:
     description: 'Pull Request number'
     required: false
     default: '${{ github.event_number }}'

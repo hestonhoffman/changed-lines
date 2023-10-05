@@ -68,16 +68,17 @@ def get_lines(line_dict):
     return final_dict
 
 if __name__ == "__main__":
+    
     TOKEN = os.getenv('INPUT_TOKEN')
     branch_name = os.getenv('INPUT_BRANCH')
     repo = os.getenv('INPUT_REPO')
-    pr = os.getenv('INPUT_PR_NUMBER')
+    pr = os.getenv('INPUT_PR')
     github_env = os.getenv('GITHUB_ENV')
     
-    print(repo)
-    print(branch_name)
-    print(pr)
-    print(github_env)
+    print(f'REPO: {repo}')
+    print(f'BRANCH: {branch_name}')
+    print(f'PR NUMBER: {pr}')
+    print(f'ENV: {github_env}')
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
