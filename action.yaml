@@ -24,6 +24,8 @@ inputs:
 outputs:
   changed_lines:
     description: 'Lines with changes'
+  changed_files: 
+    description: 'Files with changes'
 runs:
   using: 'docker'
   image: 'Dockerfile'

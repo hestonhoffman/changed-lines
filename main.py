@@ -73,12 +73,20 @@ if __name__ == "__main__":
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR')
     github_env = os.getenv('GITHUB_ENV')
+    
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
 
     data = fetch_patch()
-    added_lines = parse_patch_data(data)
+    added_line_data = parse_patch_data(data)
+    added_lines = get_lines(added_line_data)
+    filename_list = []
+    for filename in added_lines:
+        filename_list.append(filename)
 
     with open(github_env, 'a', encoding='utf-8') as f:
-        f.write(f'changed_lines={json.dumps(get_lines(added_lines))}')
+        f.write(f'changed_lines={json.dumps(added_lines)}')    
+
+    with open(github_env, 'a', encoding='utf-8') as f:
+        f.write(f'changed_files={filename_list}')
