@@ -21,6 +21,10 @@ inputs:
     description: 'Pull Request number'
     required: false
     default: '${{ github.event.number }}'
+  delimiter:
+    description: 'Delimiter to use for changes_files output'
+    required: false
+    default: ' '
 outputs:
   changed_lines:
     description: 'Lines with changes'
