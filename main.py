@@ -72,7 +72,7 @@ if __name__ == "__main__":
     branch_name = os.getenv('INPUT_BRANCH')
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR')
-    github_env = os.getenv('GITHUB_ENV')
+    github_output = os.getenv('GITHUB_OUTPUT')
     
 
     if not TOKEN:
@@ -85,8 +85,8 @@ if __name__ == "__main__":
     for filename in added_lines:
         filename_list.append(filename)
 
-    with open(github_env, 'a', encoding='utf-8') as f:
-        f.write(f'changed_lines={json.dumps(added_lines)}\n')    
+    with open(github_output, 'a', encoding='utf-8') as f:
+        f.write(f'changed_lines={json.dumps(added_lines)}')    
 
-    with open(github_env, 'a', encoding='utf-8') as f:
+    with open(github_output, 'a', encoding='utf-8') as f:
         f.write(f'changed_files={filename_list}')
