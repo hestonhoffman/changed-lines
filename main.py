@@ -86,7 +86,7 @@ if __name__ == "__main__":
         filename_list.append(filename)
 
     with open(github_env, 'a', encoding='utf-8') as f:
-        f.write(f'changed_lines={json.dumps(added_lines)}')    
+        f.write(f'changed_lines={json.dumps(added_lines)}\n')    
 
     with open(github_env, 'a', encoding='utf-8') as f:
         f.write(f'changed_files={filename_list}')
