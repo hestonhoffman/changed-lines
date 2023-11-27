@@ -73,7 +73,6 @@ if __name__ == "__main__":
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR')
     github_output = os.getenv('GITHUB_OUTPUT')
-    
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
@@ -86,7 +85,7 @@ if __name__ == "__main__":
         filename_list.append(filename)
 
     with open(github_output, 'a', encoding='utf-8') as f:
-        f.write(f'changed_lines={json.dumps(added_lines)}\n')    
-
-    with open(github_output, 'a', encoding='utf-8') as f:
-        f.write(f'changed_files={filename_list}\n')
+        f.write(
+            f'changed_lines={json.dumps(added_lines)}\n' +
+            f'changed_files={filename_list}\n'
+            )
