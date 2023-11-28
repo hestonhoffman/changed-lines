@@ -63,7 +63,9 @@ def get_lines(line_dict):
                 if line.startswith('+'):
                     line_array.append(line_number)
                 line_number += 1
-        final_dict[file_name] = line_array
+        # Remove deleted/renamed files (which appear as empty arrays)
+        if line_array:        
+            final_dict[file_name] = line_array
     return final_dict
 
 if __name__ == "__main__":
@@ -72,13 +74,21 @@ if __name__ == "__main__":
     branch_name = os.getenv('INPUT_BRANCH')
     repo = os.getenv('INPUT_REPO')
     pr = os.getenv('INPUT_PR')
-    github_env = os.getenv('GITHUB_ENV')
+    github_output = os.getenv('GITHUB_OUTPUT')
+    delimiter = os.getenv('INPUT_DELIMITER')
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
 
     data = fetch_patch()
-    added_lines = parse_patch_data(data)
+    added_line_data = parse_patch_data(data)
+    added_lines = get_lines(added_line_data)
+    filename_list = ''
+    for filename in added_lines:
+        filename_list += filename + delimiter
 
-    with open(github_env, 'a', encoding='utf-8') as f:
-        f.write(f'changed_lines={json.dumps(get_lines(added_lines))}')
+    with open(github_output, 'a', encoding='utf-8') as f:
+        f.write(
+            f'changed_lines={json.dumps(added_lines)}\n' +
+            f'changed_files={filename_list.strip()}\n'
+            )
