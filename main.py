@@ -63,7 +63,9 @@ def get_lines(line_dict):
                 if line.startswith('+'):
                     line_array.append(line_number)
                 line_number += 1
-        final_dict[file_name] = line_array
+        # Remove deleted/renamed files (which appear as empty arrays)
+        if line_array:        
+            final_dict[file_name] = line_array
     return final_dict
 
 if __name__ == "__main__":
