@@ -6,6 +6,7 @@ This GitHub action returns the file names and modified lines of each file in a p
 
 > [!NOTE]
 > This action only works with pull requests.
+> This action only works on Linux runners.
 
 The action outputs a JSON formatted string. For example:
 ```json
@@ -24,9 +25,30 @@ jobs:
       - uses: actions/checkout@v4
       - name: Find changed lines
         id: changed_lines
-        uses: hestonhoffman/changed_lines@main
+        uses: hestonhoffman/changed_lines@v1
       - name: Print changed lines
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
+```
+
+## Changed files
+
+The `outputs.changed_files` output gives you only the changed filenames in a space-delimited list. For example:
+```bash
+test_file_1.py test_file_2.md test_file_3.txt
+```
+
+To change the delimiter, use the `delimiter` input. The following example outputs filenames separated by commas:
+```yaml
+[...]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find changed lines
+        id: changed_lines
+        uses: hestonhoffman/changed_lines@v1
+      - name: Print changed files
+        with:
+          delimiter: ','
+        run: echo ${{ steps.changed_lines.outputs.changed_files }}
 ```
 
 Thanks to Jacob Tomlinson [for a helpful tutorial](https://jacobtomlinson.dev/posts/2019/creating-github-actions-in-python/).
