@@ -6,6 +6,7 @@ import os
 import re
 import json
 import requests
+import pprint
 
 class MissingToken(Exception):
     '''Raised when the GitHub token is missing'''
@@ -28,11 +29,14 @@ def parse_patch_data(patch_data):
     '''Takes the patch data and returns a dictionary of files and the lines'''
     final_dict = {}
     for entry in patch_data:
-        patch_array = re.split('\n', entry['patch'])
-        # clean patch array
-        patch_array = [i for i in patch_array if i]
-        line_array = []
-        sublist = []
+        if entry['additions'] != 0:
+                patch_array = re.split('\n', entry['patch'])
+                # clean patch array
+                patch_array = [i for i in patch_array if i]
+                line_array = []
+                sublist = []
+        else:
+            continue    
 
         for item in patch_array:
             # Grabs hunk annotation and strips out added lines
