@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Find changed lines
         id: changed_lines
-        uses: hestonhoffman/changed_lines@v1
+        uses: hestonhoffman/changed-lines@v1
       - name: Print changed lines
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
 ```
@@ -44,7 +44,7 @@ To change the delimiter, use the `delimiter` input. The following example output
       - uses: actions/checkout@v4
       - name: Find changed lines
         id: changed_lines
-        uses: hestonhoffman/changed_lines@v1
+        uses: hestonhoffman/changed-lines@v1
       - name: Print changed files
         with:
           delimiter: ','
