@@ -6,7 +6,6 @@ import os
 import re
 import json
 import requests
-from pprint import pprint
 
 class MissingToken(Exception):
     '''Raised when the GitHub token is missing'''
