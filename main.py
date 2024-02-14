@@ -34,8 +34,7 @@ def parse_patch_data(patch_data):
     sublist = []
     final_dict = {}
     for entry in patch_data:
-        if entry['additions'] != 0:
-            if 'patch' in entry:
+        if entry['additions'] != 0 and 'patch' in entry:
                 patch_array = re.split('\n', entry['patch'])
                 # clean patch array
                 patch_array = [i for i in patch_array if i]
