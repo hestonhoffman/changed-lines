@@ -34,6 +34,10 @@ def parse_patch_data(patch_data):
     sublist = []
     final_dict = {}
     for entry in patch_data:
+        # We can only operate on files with additions and a patch key
+        # Some really long files don't have a patch key because github 
+        # doesn't want to return the whole file and instead retuens a 
+        # message in the PR that the file is too large to display
         if entry['additions'] != 0 and 'patch' in entry:
                 patch_array = re.split('\n', entry['patch'])
                 # clean patch array
