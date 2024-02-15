@@ -6,13 +6,15 @@ import os
 import re
 import json
 import requests
-import pprint
 
 class MissingToken(Exception):
     '''Raised when the GitHub token is missing'''
+    
+class MissingPatchData(Exception):
+    '''Raised when the patch data is missing'''    
 
 def fetch_patch():
-    '''Grabs the patch data from the GitHub API and returns it as a JSON object.'''
+    '''Grabs the patch data from the GitHub API.'''
     git_session = requests.Session()
     headers = {
         'Accept': 'application/vnd.github+json',
@@ -27,16 +29,18 @@ def fetch_patch():
 
 def parse_patch_data(patch_data):
     '''Takes the patch data and returns a dictionary of files and the lines'''
+    line_array = []
+    sublist = []
     final_dict = {}
     for entry in patch_data:
-        if entry['additions'] != 0:
+        # We can only operate on files with additions and a patch key
+        # Some really long files don't have a patch key because github 
+        # doesn't want to return the whole file and instead retuens a 
+        # message in the PR that the file is too large to display
+        if entry['additions'] != 0 and 'patch' in entry:
                 patch_array = re.split('\n', entry['patch'])
                 # clean patch array
                 patch_array = [i for i in patch_array if i]
-                line_array = []
-                sublist = []
-        else:
-            continue    
 
         for item in patch_array:
             # Grabs hunk annotation and strips out added lines
