@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.3
+
+- ([bug][3]) Ignore deleted files in a PR.
+
+[3]: https://github.com/hestonhoffman/changed-lines/pull/6
+
 ### 1.2
 
 - ([bug][2]) Account for entries with no patch data: When a diff is too large to display in the PR, GitHub doesn't provide the patch, so there's no way to grab the modified lines. Entries that don't contain patch data are now skipped.
