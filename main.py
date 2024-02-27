@@ -33,27 +33,29 @@ def parse_patch_data(patch_data):
     sublist = []
     final_dict = {}
     for entry in patch_data:
-        # We can only operate on files with additions and a patch key
-        # Some really long files don't have a patch key because github 
-        # doesn't want to return the whole file and instead retuens a 
-        # message in the PR that the file is too large to display
-        if entry['additions'] != 0 and 'patch' in entry:
-                patch_array = re.split('\n', entry['patch'])
-                # clean patch array
-                patch_array = [i for i in patch_array if i]
+        # We don't need removed files
+        if entry['status'] != 'removed':
+            # We can only operate on files with additions and a patch key
+            # Some really long files don't have a patch key because github 
+            # doesn't want to return the whole file and instead retuens a 
+            # message in the PR that the file is too large to display
+            if entry['additions'] != 0 and 'patch' in entry:
+                    patch_array = re.split('\n', entry['patch'])
+                    # clean patch array
+                    patch_array = [i for i in patch_array if i]
 
-        for item in patch_array:
-            # Grabs hunk annotation and strips out added lines
-            if item.startswith('@@ -'):
-                if sublist:
-                    line_array.append(sublist)
-                sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
-            # We don't need removed lines ('-')
-            elif not item.startswith('-') and not item == '\\ No newline at end of file':
-                sublist.append(item)
-        if sublist:
-            line_array.append(sublist)
-            final_dict[entry['filename']] = line_array
+            for item in patch_array:
+                # Grabs hunk annotation and strips out added lines
+                if item.startswith('@@ -'):
+                    if sublist:
+                        line_array.append(sublist)
+                    sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
+                # We don't need removed lines ('-')
+                elif not item.startswith('-') and not item == '\\ No newline at end of file':
+                    sublist.append(item)
+            if sublist:
+                line_array.append(sublist)
+                final_dict[entry['filename']] = line_array
     return final_dict
 
 def get_lines(line_dict):
