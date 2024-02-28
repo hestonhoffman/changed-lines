@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.4
+
+- ([bug][4]) Fix a bug that was causing a `'patch_array' referenced before assignment` error.
+
+[4]: https://github.com/hestonhoffman/changed-lines/pull/9
+
 ### 1.3
 
 - ([bug][3]) Ignore deleted files in a PR.
