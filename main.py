@@ -44,18 +44,18 @@ def parse_patch_data(patch_data):
                     # clean patch array
                     patch_array = [i for i in patch_array if i]
 
-            for item in patch_array:
-                # Grabs hunk annotation and strips out added lines
-                if item.startswith('@@ -'):
+                    for item in patch_array:
+                        # Grabs hunk annotation and strips out added lines
+                        if item.startswith('@@ -'):
+                            if sublist:
+                                line_array.append(sublist)
+                            sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
+                        # We don't need removed lines ('-')
+                        elif not item.startswith('-') and not item == '\\ No newline at end of file':
+                            sublist.append(item)
                     if sublist:
                         line_array.append(sublist)
-                    sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
-                # We don't need removed lines ('-')
-                elif not item.startswith('-') and not item == '\\ No newline at end of file':
-                    sublist.append(item)
-            if sublist:
-                line_array.append(sublist)
-                final_dict[entry['filename']] = line_array
+                        final_dict[entry['filename']] = line_array
     return final_dict
 
 def get_lines(line_dict):
