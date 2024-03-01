@@ -99,12 +99,12 @@ if __name__ == "__main__":
     filter_added_lines = {}
         
     if file_filter:
-        file_filter = set(file_filter.split(delimiter))
+        file_filter = set(file_filter.replace(' ','').split(','))
         for filename in added_lines:
             if os.path.splitext(filename)[1] in file_filter:
                 filter_added_lines[filename] = added_lines[filename]
     else:
-        filter_added_lines = added_lines       
+        filter_added_lines = added_lines
     
     for filename in filter_added_lines:
         filename_list += filename + delimiter
