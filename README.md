@@ -30,12 +30,14 @@ jobs:
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
 ```
 
-## Changed files
+## Return only a list of changed files
 
 The `outputs.changed_files` output gives you only the changed filenames in a space-delimited list. For example:
 ```bash
 test_file_1.py test_file_2.md test_file_3.txt
 ```
+
+## File delimiter
 
 To change the delimiter, use the `delimiter` input. The following example outputs filenames separated by commas:
 ```yaml
@@ -48,6 +50,22 @@ To change the delimiter, use the `delimiter` input. The following example output
       - name: Print changed files
         with:
           delimiter: ','
+        run: echo ${{ steps.changed_lines.outputs.changed_files }}
+```
+
+## Filter by file type
+
+To return the output for only certain file types, use the `file_filter` input and specify a comma-separated list of file extensions. The following example only returns markdown and text files:
+```yaml
+[...]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find changed lines
+        id: changed_lines
+        uses: hestonhoffman/changed-lines@v1
+      - name: Print changed files
+        with:
+          file_filter: '.md, .txt'
         run: echo ${{ steps.changed_lines.outputs.changed_files }}
 ```
 

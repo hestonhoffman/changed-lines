@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.5
+
+- ([feature][5]) Filter output by file type.
+
+[5]: https://github.com/hestonhoffman/changed-lines/pull/10
+
 ### 1.4
 
 - ([bug][4]) Fix a bug that was causing a `'patch_array' referenced before assignment` error.

@@ -86,6 +86,7 @@ if __name__ == "__main__":
     pr = os.getenv('INPUT_PR')
     github_output = os.getenv('GITHUB_OUTPUT')
     delimiter = os.getenv('INPUT_DELIMITER')
+    file_filter = os.getenv('INPUT_FILE_FILTER')
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
@@ -93,8 +94,19 @@ if __name__ == "__main__":
     data = fetch_patch()
     added_line_data = parse_patch_data(data)
     added_lines = get_lines(added_line_data)
+    
     filename_list = ''
-    for filename in added_lines:
+    filter_added_lines = {}
+        
+    if file_filter:
+        file_filter = set(file_filter.replace(' ','').split(','))
+        for filename in added_lines:
+            if os.path.splitext(filename)[1] in file_filter:
+                filter_added_lines[filename] = added_lines[filename]
+    else:
+        filter_added_lines = added_lines
+    
+    for filename in filter_added_lines:
         filename_list += filename + delimiter
 
     with open(github_output, 'a', encoding='utf-8') as f:

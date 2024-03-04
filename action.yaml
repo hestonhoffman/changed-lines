@@ -25,6 +25,10 @@ inputs:
     description: 'Delimiter to use for changes_files output'
     required: false
     default: ' '
+  file_filter:
+    description: 'Filter for file extensions to include in output. Defaults to returning all file types'
+    required: false
+    default: ''
 outputs:
   changed_lines:
     description: 'Lines with changes'
