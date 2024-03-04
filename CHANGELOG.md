@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.6
+
+- ([bug][6]) Fixes bug where `file_filter` was returning all changed lines.
+
+[6]: https://github.com/hestonhoffman/changed-lines/pull/11
+
 ### 1.5
 
 - ([feature][5]) Filter output by file type.
