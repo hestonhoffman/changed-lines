@@ -111,6 +111,6 @@ if __name__ == "__main__":
 
     with open(github_output, 'a', encoding='utf-8') as f:
         f.write(
-            f'changed_lines={json.dumps(added_lines)}\n' +
+            f'changed_lines={json.dumps(filter_added_lines)}\n' +
             f'changed_files={filename_list.strip()}\n'
             )
