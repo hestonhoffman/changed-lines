@@ -47,9 +47,9 @@ To change the delimiter, use the `delimiter` input. The following example output
       - name: Find changed lines
         id: changed_lines
         uses: hestonhoffman/changed-lines@v1
-      - name: Print changed files
         with:
           delimiter: ','
+      - name: Print changed files
         run: echo ${{ steps.changed_lines.outputs.changed_files }}
 ```
 
@@ -63,9 +63,9 @@ To return the output for only certain file types, use the `file_filter` input an
       - name: Find changed lines
         id: changed_lines
         uses: hestonhoffman/changed-lines@v1
-      - name: Print changed files
         with:
           file_filter: '.md, .txt'
+      - name: Print changed files
         run: echo ${{ steps.changed_lines.outputs.changed_files }}
 ```
 

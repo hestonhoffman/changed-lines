@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.7
+
+- ([bug][7]) Fixes duplicated entries in changed-lines output.
+- (docs) Fixes some examples in the README.
+
+[7]: https://github.com/hestonhoffman/changed-lines/pull/13
+
+Thanks to contibutor @edward-athelas!
+
 ### 1.6
 
 - ([bug][6]) Fixes bug where `file_filter` was returning all changed lines.
