@@ -29,10 +29,10 @@ def fetch_patch():
 
 def parse_patch_data(patch_data):
     '''Takes the patch data and returns a dictionary of files and the lines'''
-    line_array = []
-    sublist = []
     final_dict = {}
     for entry in patch_data:
+        line_array = []
+        sublist = []
         # We don't need removed files
         if entry['status'] != 'removed':
             # We can only operate on files with additions and a patch key
