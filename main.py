@@ -36,9 +36,8 @@ def parse_patch_data(patch_data):
         # We don't need removed files
         if entry['status'] != 'removed':
             # We can only operate on files with additions and a patch key
-            # Some really long files don't have a patch key because github 
-            # doesn't want to return the whole file and instead retuens a 
-            # message in the PR that the file is too large to display
+            # Some really big files don't have a patch key because GitHub
+            # returns a message in the PR that the file is too large to display
             if entry['additions'] != 0 and 'patch' in entry:
                     patch_array = re.split('\n', entry['patch'])
                     # clean patch array
