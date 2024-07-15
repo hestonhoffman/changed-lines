@@ -5,6 +5,10 @@ branding:
   icon: 'git-pull-request'
   color: 'green'
 inputs:
+  api_url:
+    decription: 'Github API URL (primarily for Github Enterprise usage)'
+    required: false
+    default: '${{ github.api_url }}'
   token:
     description: 'Assign a GITHUB_TOKEN to use'
     required: false

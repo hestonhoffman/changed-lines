@@ -11,7 +11,10 @@ class MissingToken(Exception):
     '''Raised when the GitHub token is missing'''
     
 class MissingPatchData(Exception):
-    '''Raised when the patch data is missing'''    
+    '''Raised when the patch data is missing'''
+
+class MissingApiUrl(Exception):
+    '''Raised when the GitHub api url is missing'''
 
 def fetch_patch():
     '''Grabs the patch data from the GitHub API.'''
@@ -22,7 +25,7 @@ def fetch_patch():
         'Authorization':f'Bearer {TOKEN}'
         }
     git_request = git_session.get(
-        f'https://api.github.com/repos/{repo}/pulls/{pr}/files',
+        f'https://{api_url}/repos/{repo}/pulls/{pr}/files',
         headers=headers
         )
     return git_request.json()
@@ -79,7 +82,8 @@ def get_lines(line_dict):
     return final_dict
 
 if __name__ == "__main__":
-    
+
+    api_url = os.getenv('INPUT_API_URL')
     TOKEN = os.getenv('INPUT_TOKEN')
     branch_name = os.getenv('INPUT_BRANCH')
     repo = os.getenv('INPUT_REPO')
@@ -90,6 +94,9 @@ if __name__ == "__main__":
 
     if not TOKEN:
         raise MissingToken('Missing GitHub token')
+
+    if not api_url:
+        raise MissingApiUrl('Missing Github api url')
 
     data = fetch_patch()
     added_line_data = parse_patch_data(data)
