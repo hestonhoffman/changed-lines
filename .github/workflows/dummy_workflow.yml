@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "Github_API_URL\n\n - ${{ github.api_url }}"
+      - run: echo "Github URL - ${{ github.api_url }}"
