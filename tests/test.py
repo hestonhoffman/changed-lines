@@ -5,10 +5,12 @@ import unittest
 import sys
 import test_data
 
-sys.path.append('../')
-import main # pylint: disable=wrong-import-position
+# sys.path.append('../')
 
-parse_patch_data = main.parse_patch_data
+from main import (
+    parse_patch_data,
+    get_lines
+) # pylint: disable=wrong-import-position
 
 class TestParsePatchData(unittest.TestCase):
     '''Test the parse_patch_data function'''
@@ -39,7 +41,7 @@ class TestGetLines(unittest.TestCase):
     def test_get_lines(self):
         '''Returns the correct line numbers for each file'''
         given = test_data.TEST_MODIFIED_ANSWER
-        got = main.get_lines(given)
+        got = get_lines(given)
         want = test_data.TEST_GET_LINES_ANSWER
         self.assertEqual(got, want)
 

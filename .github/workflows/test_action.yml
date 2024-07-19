@@ -1,4 +1,4 @@
-name: "Test changed lines"
+name: "Test changed lines action"
 on:  
   pull_request:
 jobs:
