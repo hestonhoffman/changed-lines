@@ -6,7 +6,7 @@ branding:
   color: 'green'
 inputs:
   api_url:
-    decription: 'Github API URL (primarily for Github Enterprise usage)'
+    description: 'Github API URL (primarily for Github Enterprise usage)'
     required: false
     default: '${{ github.api_url }}'
   token:
