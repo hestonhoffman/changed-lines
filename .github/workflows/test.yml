@@ -8,6 +8,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Test changed lines
         id: changed_lines
-        uses: hestonhoffman/changed-lines@main
+        uses: hestonhoffman/changed-lines@${{ GITHUB_HEAD_REF }}
       - name: Print changed lines
         run: echo ${{ steps.changed_lines.outputs.changed_lines }}
