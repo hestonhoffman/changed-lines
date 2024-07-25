@@ -69,4 +69,21 @@ To return the output for only certain file types, use the `file_filter` input an
         run: echo ${{ steps.changed_lines.outputs.changed_files }}
 ```
 
+## Use an alternate GitHub API URL
+
+Use the `api_url` input if you need to use a custom GitHub API URL. This is useful if you're a GitHub Enterprise user.
+
+```yaml
+[...]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find changed lines
+        id: changed_lines
+        uses: hestonhoffman/changed-lines@v1
+        with:
+          api_url: https://example.com
+      - name: Print changed files
+        run: echo ${{ steps.changed_lines.outputs.changed_files }}
+```
+
 Thanks to Jacob Tomlinson [for a helpful tutorial](https://jacobtomlinson.dev/posts/2019/creating-github-actions-in-python/).
