@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.8
+
+- ([feature][8]) Use a custom API URL.
+- (maint) Added unit tests
+
+Thanks to contributor @cvakiitho
+
+[8]: https://github.com/hestonhoffman/changed-lines/pull/15
+
 ### 1.7
 
 - ([bug][7]) Fixes duplicated entries in changed-lines output.
