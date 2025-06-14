@@ -24,11 +24,16 @@ def fetch_patch():
         'X-GitHub-Api-Version': '2022-11-28',
         'Authorization':f'Bearer {TOKEN}'
         }
-    git_request = git_session.get(
-        f'{api_url}/repos/{repo}/pulls/{pr}/files',
-        headers=headers
-        )
-    return git_request.json()
+    # Fetch the first page
+    response = git_session.get(
+        f"{api_url}/repos/{repo}/pulls/{pr}/files", headers=headers
+    )
+    files = response.json()
+    # Follow 'next' links to fetch the remaining pages
+    while 'next' in response.links:
+        response = git_session.get(response.links['next']['url'], headers=headers)
+        files.extend(response.json())
+    return files
 
 def parse_patch_data(patch_data):
     '''Takes the patch data and returns a dictionary of files and the lines'''
