@@ -108,6 +108,10 @@ If you want to run the script locally:
    ```shell
    cp example.env .env
    ```
+1. Source the environment variables:
+   ```shell
+   source .env
+   ```
 1. Run the script:
    ```shell
    python main.py
