@@ -24,9 +24,9 @@ def fetch_patch():
         'X-GitHub-Api-Version': '2022-11-28',
         'Authorization':f'Bearer {TOKEN}'
         }
-    # Fetch the first page
+    # Fetch the first page with per_page=100
     response = git_session.get(
-        f"{api_url}/repos/{repo}/pulls/{pr}/files", headers=headers
+        f"{api_url}/repos/{repo}/pulls/{pr}/files?per_page=100", headers=headers
     )
     files = response.json()
     # Follow 'next' links to fetch the remaining pages
@@ -47,22 +47,22 @@ def parse_patch_data(patch_data):
             # Some really big files don't have a patch key because GitHub
             # returns a message in the PR that the file is too large to display
             if entry['additions'] != 0 and 'patch' in entry:
-                    patch_array = re.split('\n', entry['patch'])
-                    # clean patch array
-                    patch_array = [i for i in patch_array if i]
+                patch_array = re.split('\n', entry['patch'])
+                # clean patch array
+                patch_array = [i for i in patch_array if i]
 
-                    for item in patch_array:
-                        # Grabs hunk annotation and strips out added lines
-                        if item.startswith('@@ -'):
-                            if sublist:
-                                line_array.append(sublist)
-                            sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
-                        # We don't need removed lines ('-')
-                        elif not item.startswith('-') and not item == '\\ No newline at end of file':
-                            sublist.append(item)
-                    if sublist:
-                        line_array.append(sublist)
-                        final_dict[entry['filename']] = line_array
+                for item in patch_array:
+                    # Grabs hunk annotation and strips out added lines
+                    if item.startswith('@@ -'):
+                        if sublist:
+                            line_array.append(sublist)
+                        sublist = [re.sub(r'\s@@(.*)','',item.split('+')[1])]
+                    # We don't need removed lines ('-')
+                    elif not item.startswith('-') and not item == '\\ No newline at end of file':
+                        sublist.append(item)
+                if sublist:
+                    line_array.append(sublist)
+                    final_dict[entry['filename']] = line_array
     return final_dict
 
 def get_lines(line_dict):
