@@ -3,3 +3,6 @@ temp.txt
 .DS_Store
 __pycache__
 test_patch_data.json
+
+# used for local testing
+.env

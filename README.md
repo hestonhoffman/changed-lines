@@ -2,7 +2,10 @@
 
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/hestonhoffman/changed-lines)
 
-This GitHub action returns the file names and modified lines of each file in a pull request. This is useful if you're running a custom linter against your files and you want to compare log lines against modified lines in your PR.
+This GitHub action returns the file names and modified lines of each file in a pull request. This action is intended for custom linters, where you want to compare log lines against modified lines in your PR.
+
+The action uses the patch data returned from the [Git API PR endpoint](https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#list-pull-requests-files) to collect the modified file names and lines. Changes in your PR are compared against the target branch and line numbers in the output are relative to the modified file. If the entire file is new, all lines appear in the output.
+
 
 > [!NOTE]
 > This action only works with pull requests.
@@ -87,3 +90,30 @@ Use the `api_url` input if you need to use a custom GitHub API URL. This is usef
 ```
 
 Thanks to Jacob Tomlinson [for a helpful tutorial](https://jacobtomlinson.dev/posts/2019/creating-github-actions-in-python/).
+
+## Local development
+
+You can use the instructions below to load some environment variables so you can run the script locally. You'll need a GitHub personal access token with repo privileges.
+
+If you want to run the script locally:
+1. (Optional) Set up a virtual environment using your preferred method.
+1. Install the python modules:
+   ```shell
+   pip install -r requirements.txt
+   ```
+1. Make a copy of `example.env` and change the environment variables to point to a PR you want to test against:
+   
+   **Note**: This file (`.env`) is ignored by git, but make sure you don't accidentally commit it somehow, as it stores your git token.
+   
+   ```shell
+   cp example.env .env
+   ```
+1. Run the script:
+   ```shell
+   python main.py
+   ```
+1. Check the generated text file for the results. The environment `GITHUB_OUTPUT` variable sets this to `temp.txt` by default.
+
+## Deleted files and lines
+
+Deleted files and lines don't show up in the output. This is intentional because the main use case for the action is to pass changed lines to a linter for GitHub command annotations. The GitHub API doesn't allow annotations on deleted lines.

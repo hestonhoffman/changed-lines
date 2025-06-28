@@ -33,6 +33,7 @@ def fetch_patch():
     while 'next' in response.links:
         response = git_session.get(response.links['next']['url'], headers=headers)
         files.extend(response.json())
+
     return files
 
 def parse_patch_data(patch_data):
